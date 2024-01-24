@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"path/filepath"
-	"slices"
 	"strings"
 
 	"github.com/jandedobbeleer/oh-my-posh/src/platform"
@@ -72,11 +71,6 @@ func (p *Python) loadContext() {
 		"VIRTUAL_ENV",
 		"CONDA_ENV_PATH",
 		"CONDA_DEFAULT_ENV",
-	}
-
-	defaultVenvNames := []string{
-		".venv",
-		"venv",
 	}
 
 	var venv string
