@@ -85,18 +85,7 @@ func (p *Python) loadContext() {
 		if len(venv) == 0 {
 			continue
 		}
-
-		name := platform.Base(p.language.env, venv)
-
-		if slices.Contains(defaultVenvNames, name) {
-			venv = strings.TrimSuffix(venv, name)
-			name = platform.Base(p.language.env, venv)
-		}
-
-		if p.canUseVenvName(name) {
-			p.Venv = name
-			break
-		}
+		p.Venv = venv
 	}
 }
 
