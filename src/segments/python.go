@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"path/filepath"
-	"slices"
 	"strings"
 
 	"github.com/jandedobbeleer/oh-my-posh/src/platform"
@@ -74,29 +73,13 @@ func (p *Python) loadContext() {
 		"CONDA_DEFAULT_ENV",
 	}
 
-	defaultVenvNames := []string{
-		".venv",
-		"venv",
-	}
-
 	var venv string
 	for _, venvVar := range venvVars {
 		venv = p.language.env.Getenv(venvVar)
 		if len(venv) == 0 {
 			continue
 		}
-
-		name := platform.Base(p.language.env, venv)
-
-		if slices.Contains(defaultVenvNames, name) {
-			venv = strings.TrimSuffix(venv, name)
-			name = platform.Base(p.language.env, venv)
-		}
-
-		if p.canUseVenvName(name) {
-			p.Venv = name
-			break
-		}
+		p.Venv = venv
 	}
 }
 
